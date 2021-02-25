@@ -9,7 +9,7 @@
  */
 
 html {
-    line-height: 1.15; /* 1 */
+    line-height: 1.8;
     -webkit-text-size-adjust: 100%; /* 2 */
 }
 
@@ -20,9 +20,10 @@ html {
  * Remove the margin in all browsers.
  */
 
-body, html {
+body, html, * {
     padding: 0;
     margin: 0;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /**
@@ -375,10 +376,45 @@ template {
 .link {
     color: #a27c54;
 }
-.font18{font-size:18px;}
-.font20{font-size:20px;}
-.mart-40{margin-top:40px;}
-.mart-130{margin-top:130px;}
+a.link:hover {
+    text-decoration: underline;
+}
+.font14 {
+    font-size: 14px;
+}
+.font16 {
+    font-size: 16px;
+}
+.font18 {
+    font-size: 18px;
+}
+
+.font20 {
+    font-size: 20px;
+}
+
+.font24 {
+    font-size: 24px;
+}
+
+.font28 {
+    font-size: 28px;
+}
+
+.font30 {
+    font-size: 30px;
+}
+.mart-20 {
+    margin-top: 20px;
+}
+.mart-40 {
+    margin-top: 40px;
+}
+
+.mart-130 {
+    margin-top: 130px;
+}
+
 /*clear*/
 .clear {
     clear: both;
@@ -403,9 +439,14 @@ template {
     overflow: hidden;
 }
 
+.relative {
+    position: relative;
+}
+
 /*index*/
 body {
     background: #f6f5f1;
+    overflow-scrolling: touch;
 }
 
 .layout {
@@ -430,6 +471,7 @@ body {
     font-family: "HYXiDengXianJ" !important;
     font-style: normal;
 }
+
 @font-face {
     font-family: 'HYQiHeiX2';
     font-display: swap;
@@ -442,6 +484,20 @@ body {
     font-family: "HYQiHeiX2" !important;
     font-style: normal;
 }
+
+@font-face {
+    font-family: 'Helvetica';
+    font-display: swap;
+    src: url('font/HelveticaNeueLTStd/HelveticaNeueLTStd-ThCn.eot'); /* IE9*/
+    src: url('font/HelveticaNeueLTStd/HelveticaNeueLTStd-ThCn.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('font/HelveticaNeueLTStd/HelveticaNeueLTStd-ThCn.woff2') format('woff2'),
+    url('font/HelveticaNeueLTStd/HelveticaNeueLTStd-ThCn.woff') format('woff'), /* chrome、firefox */ url('font/HelveticaNeueLTStd/HelveticaNeueLTStd-ThCn.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url('font/HYXiDengXianJ/HYXiDengXianJ.svg') format('svg'); /* iOS 4.1- */
+}
+
+.Helvetica {
+    font-family: "Helvetica" !important;
+    font-style: normal;
+}
+
 .logo {
     display: block;
     width: 24%;
@@ -485,16 +541,152 @@ body {
     height: 27px;
     outline: 0;
 }
-.news-list a.link{
+
+.news-list a.link {
     text-decoration: underline;
 }
-.news-list p:before{
+
+.news-list p:before {
     content: '◆';
 }
 
+.swiper-news {
+    width: 55%;
+    margin-right: 5%;
+}
 
+.swiper-news .swiper-container {
+    margin: 0 120px;
+}
 
+.swiper-button-next, .swiper-button-prev {
+    outline: 0;
+    left: 0;
+    color: #a27c54;
+}
 
+.swiper-button-next {
+    left: inherit;
+    right: 0;
+}
+
+.swiper-slide {
+    display: block;
+}
+
+.swiper-news .swiper-slide img {
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+}
+
+.swiper-news .swiper-slide .title {
+    height: 30px;
+    line-height: 30px;
+    margin-top: 30px;
+}
+
+.swiper-news .swiper-slide .title a {
+    display: block
+}
+
+:root {
+    --swiper-navigation-size: 30px;
+}
+
+.content {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.slogan {
+    padding: 350px 0;
+}
+
+.line {
+    display: inline-block;
+    width: 34px;
+    border-bottom: 1px solid #d1c2b3;
+}
+
+.swiper-works {
+    margin: 0 60px;
+}
+
+.swiper-works img {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.nums-nav {
+    position: absolute;
+    width: 100px;
+    top: -20px;
+    left: -100px;
+}
+
+.nums-nav span {
+    display: block;
+    line-height:32px;
+    cursor: pointer;
+    color: #a27c54;
+
+}
+
+.nums-nav span.active,.nums-nav span:hover{
+    color: #9f3808;
+    text-decoration: underline;
+}
+.about{
+    width: 50%;
+    text-align: justify;
+}
+.about img{
+    width: 80%;
+}
+.footer a{
+    color: #282827;
+    text-decoration: underline;
+}
+@media screen and (max-width: 1024px) {
+    html {
+        font-size: calc(100vw / 7.5);
+    }
+
+    .font18 {
+        font-size: 0.10rem;
+    }
+
+    .font20 {
+        font-size: 0.12rem;
+    }
+
+    .mart-130 {
+        margin-top: 0.2rem;
+    }
+
+    .layout {
+        padding: 0 0.3rem;
+    }
+
+    .logo {
+        margin-top: 0.05rem;
+    }
+
+    .header {
+        padding: 0.3rem 0;
+        font-size: 0.12rem;
+    }
+
+    .header-nav a {
+        line-height: 0.3rem;
+    }
+
+    .swiper-news, .news-box {
+        width: 50%;
+    }
+}
 
 
 
