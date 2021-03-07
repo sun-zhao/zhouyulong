@@ -24,7 +24,8 @@ const router = new VueRouter({
             name: 'home',
             component: home,
             meta: {
-                title: 'HOU YULONG'
+                title: 'HOU YULONG',
+                keepAlive: true
             }
         },
         {

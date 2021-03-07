@@ -103,6 +103,6 @@ export default {
 .nums-nav {
   position: fixed;
   left: 5%;
-  top: 40%;
+  top: 30%;
 }
 </style>

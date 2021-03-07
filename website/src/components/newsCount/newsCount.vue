@@ -1,5 +1,5 @@
 <template>
-  <div class="newscount news-content mart-130 HYQiHeiX2 clearfix animated fadeInUp">
+  <div class="newscount news-content HYQiHeiX2 clearfix animated fadeInUp">
     <div class="news-box mart-130 fl">
       <div class="personal-info font20">
         <p>周裕隆</p>

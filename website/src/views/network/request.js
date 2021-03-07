@@ -4,6 +4,10 @@ export function request(config) {
         baseURL: 'https://mall.agued.cn/',
         timeout: 5000
     })
+    // const instance = new axios.create({
+    //     baseURL: 'http://www.zhouyulongart.com/',
+    //     timeout: 5000
+    // })
     instance.interceptors.request.use(config => {
         return config
     }, err => {

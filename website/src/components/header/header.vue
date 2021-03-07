@@ -43,10 +43,12 @@ export default {
       navsEn: ['News', 'Works', 'Exhibitions', 'Publications', 'Database', 'About']
     }
   },
+  created() {
+
+  },
   methods: {
     clickTab(index) {
       this.$emit('clickTab',index)
-      this.active = index
     },
     goHome() {
       this.$router.push({name: 'home'})
