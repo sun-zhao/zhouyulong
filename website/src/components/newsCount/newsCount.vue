@@ -11,7 +11,8 @@
         <p>现居上海。</p>
       </div>
       <div class="news mart-40 font18">
-        <p>新闻</p>
+        <p v-show="!isEnglish" @click="toList(1)">新闻</p>
+        <p v-show="isEnglish" @click="toList(1)">News</p>
         <news></news>
       </div>
     </div>
@@ -29,7 +30,7 @@ export default {
   name: 'Newscount',
   data() {
     return {
-
+      isEnglish:this.GLOBAL.isEnglish
     }
   },
   components: {
@@ -39,7 +40,9 @@ export default {
   created() {
   },
   methods: {
-
+    toList(id){
+      this.$router.push({name:'list',query:{id:id}})
+    }
   }
 };
 </script>

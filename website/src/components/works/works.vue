@@ -9,8 +9,8 @@
     <div class="swiper-works">
       <swiper ref="mySwiper" :options="swiperOption">
         <swiper-slide v-for="item in yearWorks" :key="item.index">
-          <p><img :src="item.artworkImages"></p>
-          <p class="title link font14 mart-10">{{ item.title }}</p>
+          <p @click="goWorkDetail(item.id)"><img :src="item.showImages[0]"></p>
+          <p class="title link font14 mart-10">{{ !isEnglish ? item.title : item.titleEn }}</p>
         </swiper-slide>
       </swiper>
       <div class="swiper-button-next" id="swiper-news-left" @click="next"></div>
@@ -29,8 +29,17 @@ export default {
     Swiper,
     SwiperSlide
   },
+  props:{
+    clickYear:{
+      type: Number,
+      default() {
+        return 0
+      }
+    }
+  },
   data() {
     return {
+      isEnglish: this.GLOBAL.isEnglish,
       years: [],
       currentYear: '2020',
       yearWorks: [],
@@ -50,6 +59,10 @@ export default {
   computed: {},
   created() {
     this.getYearWorks(this.currentYear)
+    if(this.clickYear != 0){
+      this.getYearWorks(this.clickYear)
+      this.currentYear = this.clickYear
+    }
   },
   methods: {
     prev() {
@@ -70,7 +83,17 @@ export default {
     changeYear(year) {
       this.currentYear = year
       this.getYearWorks(this.currentYear)
+    },
+    //  跳转到作品详情
+    goWorkDetail(id) {
+      this.$router.push({name: "workDetails", query: {id: id}})
     }
   }
 }
 </script>
+<style scoped>
+.swiper-slide img {
+  object-fit: scale-down;
+  height: 400px;
+}
+</style>

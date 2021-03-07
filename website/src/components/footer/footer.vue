@@ -1,5 +1,5 @@
 <template>
-  <div class="footer slogan font18 HYQiHeiX2 text-center">
+  <div class="footer font18 HYQiHeiX2 text-center">
     <p>
       <span>微博 |</span>
       <a href="https://weibo.com/zhouyulongdtm?topnav=1&wvr=6&topsug=1&is_all=1" target="_blank">@周裕隆-</a>

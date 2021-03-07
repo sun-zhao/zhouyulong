@@ -1,8 +1,8 @@
 <template>
   <div class="news news-list">
-    <p v-for="item in news" :key="item.index">
+    <p v-for="(item,index) in news.slice(0, 2)" :key="index">
       <span>{{ item.newsTitle }}</span>
-      <a :href="item.link" :id="item.id" class="link">了解更多</a>
+      <a @click="newsClick(item.id)" :id="item.id" class="link">了解更多</a>
     </p>
   </div>
 </template>
@@ -26,6 +26,10 @@ export default {
       getHomeData().then(res => {
         this.news = res.data.news;
       })
+    },
+  //  点击查看新闻详情
+    newsClick(id){
+      this.$router.push({name: "newsDetail", query: {id: id}})
     }
   }
 }

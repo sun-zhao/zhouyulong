@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="home" @clickTab="clickTab">
     <newsCount id="news"></newsCount>
     <div class="content slogan text-center">
       <p class="font28 HYXiDengXianJ">“一切问题都没有最终答案，也没有唯一答案，所有判断都在流变。”</p>
@@ -7,17 +7,17 @@
       <p class="font18 HYQiHeiX2">盖尔式的轻盈的嘲讽。</p>
       <p class="mart-40"><span class="line"></span></p>
     </div>
-    <div class="content works relative" ref="works">
-      <works></works>
+    <div class="content scroll works relative" id="works">
+      <works :clickYear="year"></works>
     </div>
-    <div class="content slogan text-center" ref="infos">
+    <div class="content scroll slogan text-center" id="infos">
       <p class="font18 HYXiDengXianJ">近期展讯</p>
       <div class="relative swiper-info mart-40">
         <exhibitionInfo></exhibitionInfo>
       </div>
       <p class="mart-40"><span class="line"></span></p>
     </div>
-    <div class="content HYQiHeiX2" ref="publication">
+    <div class="content scroll HYQiHeiX2" id="publication">
       <div class="text-center HYXiDengXianJ font18">
         <p class="font28">出版物</p>
         <p>以下出版物集合了周裕隆的创作与实践，可通过链接进行购买。</p>
@@ -29,12 +29,12 @@
             <p>{{ item.name }}</p>
           </div>
           <p class="font14 mart-40" v-html="item.desc"></p>
-          <p><a :href="item.buyLink" class="link">点击购买</a></p>
+          <p><a :href="item.buyLink" target="_blank" class="link">点击购买</a></p>
         </div>
       </div>
       <p class="text-center mart-40"><span class="line"></span></p>
     </div>
-    <div class="content slogan HYXiDengXianJ" ref="database">
+    <div class="content scroll slogan HYXiDengXianJ" id="database">
       <div class="text-center font18">
         <p class="font28">资料库</p>
         <p>文字从自我和他者的角度阐释艺术创作。周裕隆习惯用摄影札记的方式记录拍摄前后的思考，这里也收录了他接受过的采访</p>
@@ -45,17 +45,13 @@
       </div>
       <p class="text-center mart-20"><span class="line"></span></p>
     </div>
-    <div class="content font16 HYXiDengXianJ" ref="about">
+    <div class="content scroll font16 HYXiDengXianJ" id="about">
       <div class="clearfix">
-        <span class="about fl"><img
-            src="@/assets/img/2.jpg"></span>
-        <div class="about fr">
-          <p>关于</p>
-          <p>
-            从某种角度说，周的作品渗透着历史主义者的气质，带着博斯般的宗教神秘色彩。他善用幽默的口吻表达严肃和沉重的主题，有时暗含勃鲁盖尔式的轻盈的嘲讽。周出生在知识分子家庭，童年在各种历史故事、神话传说中度过。高考时填报了考古学专业，后因英语成绩而落榜。他酷爱导演黑泽明，痴迷于作家博尔赫斯与阿瑟克拉克；反对民族主义，并对任何既成的结论都保持着警惕与怀疑。他曾说：“一切问题都没有最终答案，也没有唯一答案，所有判断都在流变”。从这些经历以及作品中不难看出，他对历史与不可知事物为何如此钟爱。也许正因如此，周不愿把自己归类于任何群体，不拘泥于创作的方法，不承认所谓的定义.（Text
-            Arthur L. Gombrich）
-          </p>
-          <p class="mart-20 "><a href="#" class="link font14">了解更多</a></p>
+        <span class="about fl">
+          <img src="@/assets/img/2.jpg"></span>
+        <div class="about fr" v-for="(item,index) in aboutInfo" :key="index">
+          <div v-if="!isEnglish" v-html="item.context"></div>
+          <div v-else v-html="item.contextEn"></div>
         </div>
       </div>
       <p class="text-center mart-40"><span class="line"></span></p>
@@ -64,12 +60,12 @@
 </template>
 
 <script>
-
 import newsCount from "@/components/newsCount/newsCount";
 import works from "@/components/works/works";
 import exhibitionInfo from "@/components/exhibitionInfo/exhibitionInfo";
 
-import {getHomeData} from "@/utils/utils";
+import {getHomeData, getAbout} from "@/utils/utils";
+
 
 export default {
   name: 'Home',
@@ -80,11 +76,28 @@ export default {
   },
   data() {
     return {
-      publications: []
+      isEnglish: this.GLOBAL.isEnglish,
+      publications: [],
+      exhibition: {},
+      aboutInfo: {}
+    }
+  },
+  computed: {
+    year() {
+      return this.$route.query.year
     }
   },
   created() {
     this.getPubData()
+    this.getAbout()
+  },
+  mounted() {
+    // 监听滚动事件
+    window.addEventListener('scroll', this.onScroll)
+  },
+  destroy() {
+    // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
+    window.removeEventListener('scroll', this.onScroll)
   },
   methods: {
     //网络数据请求相关方法
@@ -92,6 +105,86 @@ export default {
       getHomeData().then(res => {
         this.publications = res.data.publications;
       })
+    },
+    //  获取about
+    getAbout() {
+      getAbout().then(res => {
+        this.aboutInfo = res.data
+      })
+    },
+    clickTab(index){
+      console.log(index)
+    },
+    // 滚动监听器
+    onScroll() {
+      // 获取所有锚点元素
+      const navContents = document.querySelectorAll('.scroll')
+      // 所有锚点元素的 offsetTop
+      const offsetTopArr = []
+      navContents.forEach(item => {
+        offsetTopArr.push(item.offsetTop)
+      })
+      // 获取当前文档流的 scrollTop
+      const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      // 定义当前点亮的导航下标
+      let navIndex = 0
+      for (let n = 0; n < offsetTopArr.length; n++) {
+        // 如果 scrollTop 大于等于第 n 个元素的 offsetTop 则说明 n-1 的内容已经完全不可见
+        // 那么此时导航索引就应该是 n 了
+        if (scrollTop >= offsetTopArr[n]) {
+          navIndex = n
+        }
+      }
+      // 把下标赋值给 vue 的 data
+      this.active = navIndex
+    },
+    scrollTo(index) {
+      // 获取目标的 offsetTop
+      // css选择器是从 1 开始计数，我们是从 0 开始，所以要 +1
+      const targetOffsetTop = document.querySelector(`.content div:nth-child(${index + 1})`).offsetTop
+      // 获取当前 offsetTop
+      let scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+      // 定义一次跳 50 个像素，数字越大跳得越快，但是会有掉帧得感觉，步子迈大了会扯到蛋
+      const STEP = 50
+      // 判断是往下滑还是往上滑
+      if (scrollTop > targetOffsetTop) {
+        // 往上滑
+        smoothUp()
+      } else {
+        // 往下滑
+        smoothDown()
+      }
+      // 定义往下滑函数
+      function smoothDown() {
+        // 如果当前 scrollTop 小于 targetOffsetTop 说明视口还没滑到指定位置
+        if (scrollTop < targetOffsetTop) {
+          // 如果和目标相差距离大于等于 STEP 就跳 STEP
+          // 否则直接跳到目标点，目标是为了防止跳过了。
+          if (targetOffsetTop - scrollTop >= STEP) {
+            scrollTop += STEP
+          } else {
+            scrollTop = targetOffsetTop
+          }
+          document.body.scrollTop = scrollTop
+          document.documentElement.scrollTop = scrollTop
+          // 屏幕在绘制下一帧时会回调传给 requestAnimationFrame 的函数
+          // 关于 requestAnimationFrame 可以自己查一下，在这种场景下，相比 setInterval 性价比更高
+          requestAnimationFrame(smoothDown)
+        }
+      }
+      // 定义往上滑函数
+      function smoothUp() {
+        if (scrollTop > targetOffsetTop) {
+          if (scrollTop - targetOffsetTop >= STEP) {
+            scrollTop -= STEP
+          } else {
+            scrollTop = targetOffsetTop
+          }
+          document.body.scrollTop = scrollTop
+          document.documentElement.scrollTop = scrollTop
+          requestAnimationFrame(smoothUp)
+        }
+      }
     }
   }
 }

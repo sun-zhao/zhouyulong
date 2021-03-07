@@ -1,8 +1,18 @@
 <template>
-  <div class="header HYXiDengXianJ clearfix" :domItemsTop="domItemsTop">
-    <span class="fl logo"><img src="../../assets/img/logo.png"></span>
-    <div class="fl header-nav clearfix">
-      <a v-for="(item,index) in navs" :key="index" @click="navClick" :data-id="index">{{ item }}</a>
+  <div class="header HYXiDengXianJ clearfix">
+    <span class="fl logo" @click="goHome"><img src="../../assets/img/logo.png"></span>
+    <div v-if="!isEnglish" class="fl header-nav clearfix">
+      <a v-for="(item,index) in navs"
+         :class="{active: active == index}"
+         :key="index"
+         @click="clickTab(index)"
+         :data-id="index">{{ item }}</a>
+    </div>
+    <div v-else class="fl header-nav clearfix">
+      <a v-for="(item,index) in navsEn"
+         :key="index"
+         :data-id="index"
+         @click="scrollTo(index)">{{ item }}</a>
     </div>
     <div class="search-box fr">
       <input type="search">
@@ -18,19 +28,29 @@
 <script>
 export default {
   name: 'Header',
-  props:{
-    domItemsTop:Array
+  props: {
+    active: {
+      type: Number,
+      default() {
+        return 0
+      }
+    }
   },
   data() {
     return {
-      navs: ['新闻', '作品', '展览', '出版物', '资料库', '关于']
+      isEnglish: this.GLOBAL.isEnglish,
+      navs: ['新闻', '作品', '展览', '出版物', '资料库', '关于'],
+      navsEn: ['News', 'Works', 'Exhibitions', 'Publications', 'Database', 'About']
     }
   },
-  methods:{
-    navClick() {
-      // document.documentElement.scrollTop = this.domItemsTop[index] - 350
-      console.log(this.domItemsTop)
+  methods: {
+    clickTab(index) {
+      this.$emit('clickTab',index)
+      this.active = index
     },
+    goHome() {
+      this.$router.push({name: 'home'})
+    }
   }
 };
 </script>

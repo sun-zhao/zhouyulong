@@ -10,6 +10,8 @@ VueRouter.prototype.push = function push(location) {
 const home = () => import('@/views/home/home')
 const database = () => import('@/views/database/database')
 const workDetails = () => import('@/views/workDetails/workDetails')
+const newsDetail = () => import('@/views/newsDetail/newsDetail')
+const list = () => import('@/views/list/list')
 const router = new VueRouter({
     mode: 'history',
     routes: [
@@ -22,7 +24,7 @@ const router = new VueRouter({
             name: 'home',
             component: home,
             meta: {
-                title: '首页'
+                title: 'HOU YULONG'
             }
         },
         {
@@ -39,6 +41,22 @@ const router = new VueRouter({
             component: workDetails,
             meta: {
                 title: '作品详情'
+            }
+        },
+        {
+            path: '/newsDetail',
+            name: 'newsDetail',
+            component: newsDetail,
+            meta: {
+                title: '新闻详情'
+            }
+        },
+        {
+            path: '/list',
+            name: 'list',
+            component: list,
+            meta: {
+                title: '列表'
             }
         }
     ]
