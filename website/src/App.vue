@@ -18,9 +18,9 @@
       <div class="search-box fr">
         <input type="search">
         <span>
-        <em>中文</em>
+        <em @click="changeCN">中文</em>
         <em>|</em>
-        <em>English</em>
+        <em @click="changeEN">English</em>
       </span>
       </div>
     </div>
@@ -51,6 +51,9 @@ export default {
       active: 0
     }
   },
+  created() {
+
+  },
   methods: {
     clickTab(index) {
       this.$router.push({name: 'home'})
@@ -58,6 +61,16 @@ export default {
     },
     goHome() {
       this.$router.push({name: 'home'})
+    },
+    changeCN() {
+      this.$cookies.set("isEnglish", "false", "0");
+      console.log(this.$cookies.get('isEnglish'))
+      this.GLOBAL.setEN('false')
+    },
+    changeEN() {
+      this.$cookies.set("isEnglish", "true", "0");
+      this.GLOBAL.setEN('true')
+      console.log(this.GLOBAL.isEnglish)
     }
   }
 }

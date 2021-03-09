@@ -20,30 +20,35 @@ export function getCategoryList() {
 
 export function getArticleList(category) {
     return request({
-        url: '/wx/data/list?category='+category
+        url: '/wx/data/list?category=' + category
     })
 }
+
 export function getArticleDetail(id) {
     return request({
-        url: '/wx/data/detail?id='+id
+        url: '/wx/data/detail?id=' + id
     })
 }
+
 export function getNewsDetail(id) {
     return request({
-        url: '/wx/news/detail?id='+id
+        url: '/wx/news/detail?id=' + id
     })
 }
+
 export function getNewsList() {
     return request({
         url: '/wx/news/list'
     })
 }
+
 //获取展讯
 export function getExhibition() {
     return request({
         url: '/wx/preview/list'
     })
 }
+
 //获取about
 export function getAbout() {
     return request({
@@ -51,8 +56,10 @@ export function getAbout() {
     })
 }
 
-const isEnglish = false;
 export default {
-    isEnglish
+    isEnglish: false,
+    setEN(isEnglish) {
+        this.isEnglish = isEnglish;
+    }
 }
 
