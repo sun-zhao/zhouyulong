@@ -10,7 +10,8 @@
            :data-id="index">{{ item }}</a>
       </div>
       <div v-else class="fl header-nav clearfix">
-        <a v-for="(item,index) in navsEn"
+        <a :href="'#link' + index" v-for="(item,index) in navsEn"
+           :class="{active: active == index}"
            :key="index"
            :data-id="index"
            @click="clickTab(index)">{{ item }}</a>
@@ -42,9 +43,13 @@ export default {
     // Header,
     Footer
   },
+  computed: {
+    isEnglish() {
+      return this.$store.state.isEnglish
+    }
+  },
   data() {
     return {
-      isEnglish: this.GLOBAL.isEnglish,
       logUrl: '/assets/img/logo.png',
       navs: ['新闻', '作品', '展览', '出版物', '资料库', '关于'],
       navsEn: ['News', 'Works', 'Exhibitions', 'Publications', 'Database', 'About'],
@@ -63,14 +68,11 @@ export default {
       this.$router.push({name: 'home'})
     },
     changeCN() {
-      this.$cookies.set("isEnglish", "false", "0");
-      console.log(this.$cookies.get('isEnglish'))
-      this.GLOBAL.setEN('false')
+      // this.$cookies.set("isEnglish", "false", "0");
+      this.$store.commit('changeCN')
     },
     changeEN() {
-      this.$cookies.set("isEnglish", "true", "0");
-      this.GLOBAL.setEN('true')
-      console.log(this.GLOBAL.isEnglish)
+      this.$store.commit('changeEN')
     }
   }
 }

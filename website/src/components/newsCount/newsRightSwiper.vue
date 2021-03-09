@@ -23,7 +23,6 @@ export default {
   },
   data() {
     return {
-      isEnglish: this.GLOBAL.isEnglish,
       latestArt: [],
       swiperOption: {
         observer: true,//修改swiper自己或子元素时，自动初始化swiper
@@ -42,6 +41,11 @@ export default {
           hiddenClass: 'my-button-hidden', //按钮隐藏时的Class
         }
       }
+    }
+  },
+  computed:{
+    isEnglish(){
+      return this.$store.state.isEnglish
     }
   },
   created() {

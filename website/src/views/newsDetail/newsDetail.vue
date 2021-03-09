@@ -11,7 +11,6 @@ export default {
   name: 'Newsdetail',
   data(){
     return{
-      isEnglish:this.GLOBAL.isEnglish,
       newsId:this.$route.query.id,
       newsContent:{}
     }
@@ -22,6 +21,9 @@ export default {
   computed:{
     newsDetail(){
       return this.newsContent
+    },
+    isEnglish() {
+      return this.$store.state.isEnglish
     }
   },
   created() {

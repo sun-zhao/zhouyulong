@@ -12,7 +12,12 @@ export default {
   name: 'Articeldetail',
   data(){
     return{
-      isEnglish: this.GLOBAL.isEnglish
+
+    }
+  },
+  computed:{
+    isEnglish() {
+      return this.$store.state.isEnglish
     }
   },
   props:{

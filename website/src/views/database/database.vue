@@ -31,7 +31,6 @@ export default {
   },
   data() {
     return {
-      isEnglish: this.GLOBAL.isEnglish,
       categorys: {},
       currentCategoryCode: '1',
       currentArticleList: {},
@@ -41,6 +40,9 @@ export default {
   computed: {
     articelMain(){
       return this.articelContent
+    },
+    isEnglish() {
+      return this.$store.state.isEnglish
     }
   },
   created() {

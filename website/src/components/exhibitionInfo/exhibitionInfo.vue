@@ -21,7 +21,6 @@ export default {
   },
   data() {
     return {
-      isEnglish: this.GLOBAL.isEnglish,
       exhibitions:{},
       swiperOption: {
         slidesPerView: 1,
@@ -33,6 +32,11 @@ export default {
           hiddenClass: 'my-button-hidden', //按钮隐藏时的Class
         }
       }
+    }
+  },
+  computed:{
+    isEnglish() {
+      return this.$store.state.isEnglish
     }
   },
   created() {

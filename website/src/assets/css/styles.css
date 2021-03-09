@@ -660,8 +660,11 @@ a.link {
 .publication {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
 }
-
+.publication .pub-item{
+    width: 20%;
+}
 .publication .pub-item:nth-child(2) {
     margin: 0 112px;
 }
@@ -728,6 +731,7 @@ a.link {
 .articelDetail img {
     display: block;
     width: 100%;
+    height: auto;
     margin: 10px auto;
 }
 

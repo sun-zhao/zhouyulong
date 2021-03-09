@@ -1,7 +1,7 @@
 <template>
   <div class="news news-list">
     <p v-for="(item,index) in news.slice(0, 2)" :key="index">
-      <span>{{ item.newsTitle }}</span>
+      <span>{{!isEnglish ? item.newsTitle : item.newsTitleEn }}</span>
       <a @click="newsClick(item.id)" :id="item.id" class="link">了解更多</a>
     </p>
   </div>
@@ -19,6 +19,11 @@ export default {
   },
   created() {
     this.getNewsData()
+  },
+  computed:{
+    isEnglish() {
+      return this.$store.state.isEnglish
+    }
   },
   methods: {
     //网络数据请求相关方法

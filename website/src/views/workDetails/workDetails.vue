@@ -43,13 +43,15 @@ export default {
   },
   data() {
     return {
-      isEnglish: this.GLOBAL.isEnglish,
       workId: this.$route.query.id,
       worksData: {},
       years: []
     }
   },
   computed: {
+    isEnglish() {
+      return this.$store.state.isEnglish
+    },
     worksDetailData() {
       return this.worksData.artworkImages
     },

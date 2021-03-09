@@ -54,7 +54,7 @@
           <img src="@/assets/img/2.jpg"></span>
         <div class="about fr" v-for="(item,index) in aboutInfo" :key="index">
           <div v-if="!isEnglish" v-html="item.context"></div>
-          <div v-else v-html="item.contextEn"></div>
+          <div v-else v-html="item.contextEn" class="HYQiHeiX2"></div>
         </div>
       </div>
       <p class="text-center mart-40"><span class="line"></span></p>
@@ -79,7 +79,6 @@ export default {
   },
   data() {
     return {
-      isEnglish: this.GLOBAL.isEnglish,
       publications: [],
       exhibition: {},
       aboutInfo: {}
@@ -88,6 +87,9 @@ export default {
   computed: {
     year() {
       return this.$route.query.year
+    },
+    isEnglish() {
+      return this.$store.state.isEnglish
     }
   },
   created() {

@@ -12,9 +12,13 @@ export default {
   name: 'List',
   data() {
     return {
-      isEnglish: this.GLOBAL.isEnglish,
       id: this.$route.query.id,
       list: {}
+    }
+  },
+  computed:{
+    isEnglish() {
+      return this.$store.state.isEnglish
     }
   },
   created() {

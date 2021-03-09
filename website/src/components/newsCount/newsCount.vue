@@ -30,12 +30,17 @@ export default {
   name: 'Newscount',
   data() {
     return {
-      isEnglish:this.GLOBAL.isEnglish
+
     }
   },
   components: {
     news,
     newsRightSwiper
+  },
+  computed:{
+    isEnglish(){
+      return this.$store.state.isEnglish
+    }
   },
   created() {
   },

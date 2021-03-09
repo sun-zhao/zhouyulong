@@ -39,9 +39,8 @@ export default {
   },
   data() {
     return {
-      isEnglish: this.GLOBAL.isEnglish,
       years: [],
-      currentYear: '2020',
+      currentYear:'',
       yearWorks: [],
       swiperOption: {
         slidesPerView: 2,
@@ -56,8 +55,13 @@ export default {
     }
   },
   //计算属性
-  computed: {},
+  computed: {
+    isEnglish(){
+      return this.$store.state.isEnglish
+    }
+  },
   created() {
+    this.getYearWorks(this.currentYear)
     this.getYearWorks(this.currentYear)
     if(this.clickYear != 0){
       this.getYearWorks(this.clickYear)
@@ -77,6 +81,7 @@ export default {
         this.yearWorks = res.data.yearArt[year]
         let obj = res.data.yearArt
         this.years = Object.keys(obj).reverse()
+        this.currentYear = this.years[0]
       })
     },
     //  年份筛选
