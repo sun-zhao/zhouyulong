@@ -3,8 +3,8 @@
     <div class="nums-nav font20 Helvetica">
       <span v-for="(year,index) in years"
             :key="index"
-            :class="{active:year  === currentYear}"
-            @click="changeYear(year)">{{ year }}</span>
+            :class="{active:year  == currentYear}"
+            @click="changeYear(year)">{{ parseInt(year) }}</span>
     </div>
     <div class="swiper-works">
       <swiper ref="mySwiper" :options="swiperOption">
@@ -29,18 +29,9 @@ export default {
     Swiper,
     SwiperSlide
   },
-  props:{
-    clickYear:{
-      type: Number,
-      default() {
-        return 0
-      }
-    }
-  },
   data() {
     return {
       years: [],
-      currentYear:'',
       yearWorks: [],
       swiperOption: {
         slidesPerView: 2,
@@ -58,15 +49,17 @@ export default {
   computed: {
     isEnglish(){
       return this.$store.state.isEnglish
+    },
+    currentYear(){
+      return this.$store.state.currentYear
     }
   },
   created() {
-    this.getYearWorks(this.currentYear)
-    this.getYearWorks(this.currentYear)
-    if(this.clickYear != 0){
-      this.getYearWorks(this.clickYear)
-      this.currentYear = this.clickYear
-    }
+    this.getYearWorks(this.$store.state.currentYear)
+    // if(this.clickYear != 0){
+    //   this.getYearWorks(this.clickYear)
+    //   this.currentYear = this.clickYear
+    // }
   },
   methods: {
     prev() {
@@ -81,17 +74,16 @@ export default {
         this.yearWorks = res.data.yearArt[year]
         let obj = res.data.yearArt
         this.years = Object.keys(obj).reverse()
-        this.currentYear = this.years[0]
       })
     },
     //  年份筛选
     changeYear(year) {
-      this.currentYear = year
-      this.getYearWorks(this.currentYear)
+      this.$store.state.currentYear = year
+      this.getYearWorks(this.$store.state.currentYear)
     },
     //  跳转到作品详情
     goWorkDetail(id) {
-      this.$router.push({name: "workDetails", query: {id: id}})
+      this.$router.push({name: "workdetails", query: {id: id}})
     }
   }
 }

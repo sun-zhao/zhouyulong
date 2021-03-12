@@ -11,6 +11,7 @@
     </div>
     <div class="nums-nav font20 Helvetica">
       <span v-for="(year,index) in years"
+            :class="{active:year  == currentYear}"
             :key="index"
             @click="goHomeYear(year)">{{ parseInt(year) }}</span>
     </div>
@@ -37,7 +38,7 @@ import detailWorks from "@/components/detailWorks/detailWorks";
 import {getArtData, getHomeData} from "@/utils/utils";
 
 export default {
-  name: 'Workdetails',
+  name: 'workdetails',
   components: {
     detailWorks
   },
@@ -51,6 +52,9 @@ export default {
   computed: {
     isEnglish() {
       return this.$store.state.isEnglish
+    },
+    currentYear(){
+      return this.$store.state.currentYear
     },
     worksDetailData() {
       return this.worksData.artworkImages
@@ -87,15 +91,16 @@ export default {
       })
     },
     //获取年份作品列表
-    getYears() {
-      getHomeData().then(res => {
+    getYears(year) {
+      getHomeData(year).then(res => {
         let obj = res.data.yearArt
         this.years = Object.keys(obj).reverse()
       })
     },
     //  年份筛选
     goHomeYear(year) {
-      this.$router.push({name: "home", query: {year: year}})
+      this.$router.push({name: "home"})
+      this.$store.state.currentYear =  year
     }
   }
 };

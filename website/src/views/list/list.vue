@@ -16,7 +16,7 @@ export default {
       list: {}
     }
   },
-  computed:{
+  computed: {
     isEnglish() {
       return this.$store.state.isEnglish
     }
@@ -32,7 +32,7 @@ export default {
           this.list = res.data
         })
       } else {
-        console.log('搜索')
+        return
       }
     },
     //  点击查看新闻详情

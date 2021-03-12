@@ -17,7 +17,7 @@
            @click="clickTab(index)">{{ item }}</a>
       </div>
       <div class="search-box fr">
-        <input type="search">
+        <input type="search" @keyup.enter="getSearch" ref="searchInput">
         <span>
         <em @click="changeCN">中文</em>
         <em>|</em>
@@ -36,6 +36,7 @@
 <script>
 // import Header from "@/components/header/header"
 import Footer from "@/components/footer/footer";
+import {search} from '@/utils/utils'
 
 export default {
   name: 'App',
@@ -73,6 +74,14 @@ export default {
     },
     changeEN() {
       this.$store.commit('changeEN')
+    },
+    getSearch() {
+      let key = this.$refs.searchInput.value
+      search(key).then(res => {
+        console.log(res.data)
+        this.$store.state.results = res.data
+      })
+      this.$router.push({name: "results"})
     }
   }
 }

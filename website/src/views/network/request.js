@@ -1,13 +1,13 @@
 import axios from "axios";
 export function request(config) {
-    // const instance = new axios.create({
-    //     baseURL: 'https://mall.agued.cn/',
-    //     timeout: 5000
-    // })
     const instance = new axios.create({
-        baseURL: 'http://www.zhouyulongart.com/',
-        timeout: 5000
+        baseURL: 'https://mall.agued.cn/',
+        timeout: 60000
     })
+    // const instance = new axios.create({
+    //     baseURL: 'http://www.zhouyulongart.com/',
+    //     timeout: 60000
+    // })
     instance.interceptors.request.use(config => {
         return config
     }, err => {

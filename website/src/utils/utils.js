@@ -41,6 +41,11 @@ export function getNewsList() {
         url: '/wx/news/list'
     })
 }
+export function search(key) {
+    return request({
+        url: '/wx/s/k?key=' + key + '&limit=' + 100
+    })
+}
 
 //获取展讯
 export function getExhibition() {

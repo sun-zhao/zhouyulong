@@ -9,9 +9,10 @@ VueRouter.prototype.push = function push(location) {
 
 const home = () => import('@/views/home/home')
 const database = () => import('@/views/database/database')
-const workDetails = () => import('@/views/workDetails/workDetails')
+const workdetails = () => import('@/views/workdetails/workdetails')
 const newsDetail = () => import('@/views/newsDetail/newsDetail')
 const list = () => import('@/views/list/list')
+const results = () => import('@/views/results/results')
 const router = new VueRouter({
     mode: 'history',
     routes: [
@@ -37,9 +38,9 @@ const router = new VueRouter({
             }
         },
         {
-            path: '/workDetails',
-            name: 'workDetails',
-            component: workDetails,
+            path: '/workdetails',
+            name: 'workdetails',
+            component: workdetails,
             meta: {
                 title: '作品详情'
             }
@@ -58,6 +59,14 @@ const router = new VueRouter({
             component: list,
             meta: {
                 title: '列表'
+            }
+        },
+        {
+            path: '/results',
+            name: 'results',
+            component: results,
+            meta: {
+                title: '搜索结果'
             }
         }
     ]

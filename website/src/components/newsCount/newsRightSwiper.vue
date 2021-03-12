@@ -66,7 +66,7 @@ export default {
     },
 //  跳转到作品详情
     goWorkDetail(id) {
-      this.$router.push({name: "workDetails", query: {id: id}})
+      this.$router.push({name: "workdetails", query: {id: id}})
     }
   }
 }

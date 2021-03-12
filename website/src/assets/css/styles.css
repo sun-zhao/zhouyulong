@@ -711,6 +711,7 @@ a.link {
 
 .category-main p.active, .category-main p:hover {
     color: #9f3808;
+    text-decoration: underline;
 }
 
 .articleList p {
