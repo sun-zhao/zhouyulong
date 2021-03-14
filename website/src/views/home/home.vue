@@ -1,5 +1,5 @@
 <template>
-  <div  @clickTab="clickTab">
+  <div @clickTab="clickTab">
     <div class="mart-130" id="link0">
       <newsCount></newsCount>
     </div>
@@ -7,8 +7,10 @@
       <p class="font28 HYXiDengXianJ">“一切问题都没有最终答案，也没有唯一答案，所有判断都在流变。”</p>
       <p class="font18 HYQiHeiX2">周的作品渗透着历史主义者的气质，带着博斯般的宗教神秘色彩。他善用幽默的口吻表达严肃和沉重的主题，有时暗含勃鲁</p>
       <p class="font18 HYQiHeiX2">盖尔式的轻盈的嘲讽。</p>
-      <p class="mart-40" id="link1"><span class="line"></span></p>
+      <p class="mart-40"><span class="line"></span></p>
     </div>
+    <p id="link1">111</p>
+    <p id="link3">333</p>
     <div class="content scroll animated works relative fadeInUp" >
       <works :clickYear="year"></works>
     </div>
@@ -19,7 +21,7 @@
       </div>
       <p class="mart-40"><span class="line"></span></p>
     </div>
-    <div class="content scroll animated HYQiHeiX2" id="link3">
+    <div class="content scroll animated HYQiHeiX2">
       <div class="text-center HYXiDengXianJ font18">
         <p class="font28">出版物</p>
         <p>以下出版物集合了周裕隆的创作与实践，可通过链接进行购买。</p>
@@ -97,6 +99,10 @@ export default {
     this.getAbout()
   },
   mounted() {
+    if(this.$route.query.id){
+      let pageId = '#' + this.$route.query.id
+      document.querySelector(pageId).scrollIntoView(true);
+    }
     // 监听滚动事件
     window.addEventListener('scroll', this.onScroll)
   },

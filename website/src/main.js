@@ -6,11 +6,10 @@ import SwiperCore, {Autoplay} from 'swiper';
 import vuePhotoPreview from "vue-photo-preview/src/lib";
 import 'vue-photo-preview/dist/skin.css'
 import VueCookies from 'vue-cookies'
+import 'default-passive-events'
 import store from "@/store/store";
 
 Vue.use(VueCookies)
-
-
 
 Vue.use(vuePhotoPreview)
 SwiperCore.use([Autoplay]);

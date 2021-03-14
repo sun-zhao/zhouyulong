@@ -46,7 +46,7 @@ export default {
       return this.$store.state.isEnglish
     }
   },
-  created() {
+  activated() {
     this.getCategory()
     this.getCode()
     this.getId()

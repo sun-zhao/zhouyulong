@@ -3,7 +3,7 @@
     <swiper ref="mySwiper" v-if="latestArt.length > 1" :options="swiperOption">
       <swiper-slide v-for="item in latestArt" :key="item.index">
         <p @click="goWorkDetail(item.id)"><img :src="item.artworkImages[0]"></p>
-        <p class="title"><a class="link font14">{{ isEnglish ? item.titleEn : item.title }}</a></p>
+        <p class="title" @click="goWorkDetail(item.id)"><a class="link font14">{{ isEnglish ? item.titleEn : item.title }}</a></p>
       </swiper-slide>
     </swiper>
     <div class="swiper-button-next" id="swiper-news-left" @click="next"></div>
@@ -31,10 +31,10 @@ export default {
         spaceBetween: 10,
         slidesPerGroup: 1,
         loop: true,
-        // autoplay: {
-        //   delay: 2000,
-        //   disableOnInteraction: false
-        // },
+        autoplay: {
+          delay: 2000,
+          // disableOnInteraction: false
+        },
         navigation: {
           nextEl: '.swiper-button-next', //前进按钮的css选择器或HTML元素。
           prevEl: '.swiper-button-prev', //后退按钮的css选择器或HTML元素。

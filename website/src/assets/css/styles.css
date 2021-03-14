@@ -11,6 +11,7 @@
 html {
     line-height: 1.8;
     -webkit-text-size-adjust: 100%; /* 2 */
+    position: relative;
 }
 
 /* Sections
@@ -33,9 +34,11 @@ body, html, * {
 main {
     display: block;
 }
-html{
+
+html {
     scroll-behavior: smooth;
 }
+
 /**
  * Correct the font size and margin on `h1` elements within `section` and
  * `article` contexts in Chrome, Firefox, and Safari.
@@ -501,7 +504,7 @@ body {
     cursor: pointer;
 }
 
-.header-nav a:hover,.header-nav a.active{
+.header-nav a:hover, .header-nav a.active {
     color: #94652e;
 }
 
@@ -575,7 +578,8 @@ a.link {
 }
 
 .swiper-news .swiper-slide .title a {
-    display: block
+    display: block;
+    text-align: left;
 }
 
 :root {
@@ -662,9 +666,11 @@ a.link {
     flex-direction: row;
     justify-content: space-around;
 }
-.publication .pub-item{
+
+.publication .pub-item {
     width: 20%;
 }
+
 .publication .pub-item:nth-child(2) {
     margin: 0 112px;
 }
@@ -695,7 +701,10 @@ a.link {
 .pswp__button--arrow--right:before {
     background: url("../../assets/img/next.png") no-repeat !important;;
 }
-
+.pswp__caption__center{
+    width:70%!important;
+    max-width: 100%!important;
+}
 .category-main {
     position: fixed;
     left: 5%;
@@ -743,13 +752,25 @@ a.link {
 .article-text p a {
     color: #a27c54;
 }
-.list{
-    padding-top:100px;
+
+.list {
+    padding-top: 100px;
 }
+
 .list p:hover {
     text-decoration: underline;
     color: #a27c54;
     cursor: pointer;
+}
+
+#link1,#link3{
+    position: absolute;
+    top: 26.6%;
+    z-index: 999;
+    opacity: 0;
+}
+#link3{
+    top:52%;
 }
 
 @media screen and (max-width: 1024px) {

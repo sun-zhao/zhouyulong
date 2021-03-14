@@ -2,7 +2,8 @@
   <div class="content">
     <div class="work-slogan text-center HYXiDengXianJ font18">
       <p class="font28">
-        <span>《 {{ !isEnglish ? worksData.title : worksData.titleEn }} 》 </span>
+        <span v-if="!isEnglish">《 {{ worksData.title }} 》 </span>
+        <span style="font-style: italic;" v-else>{{worksData.titleEn}}</span>
         ©
         <span>{{ worksData.artYear }}</span>
       </p>
@@ -16,14 +17,16 @@
             @click="goHomeYear(year)">{{ parseInt(year) }}</span>
     </div>
     <div class="content works relative" ref="works">
-      <detailWorks :works_details="worksDetailData" :preview="worksPreview" :previewText="worksPreviewText"></detailWorks>
-      <p class="HYXiDengXianJ link text-center mart-20">
-        <span>《 {{ !isEnglish ? worksData.title : worksData.titleEn }} 》 </span>
+      <detailWorks :works_details="worksDetailData" :preview="worksPreview"
+                   :previewText="worksPreviewText"></detailWorks>
+      <p class="HYXiDengXianJ link text-left mart-20">
+        <span v-if="!isEnglish">《{{ worksData.title }}》</span>
+        <span style="font-style: italic;" v-else>{{ worksData.titleEn }}</span>
         ©
         <span>{{ worksData.artYear }}</span>
       </p>
     </div>
-    <div class="content work-slogan relative" ref="works">
+    <div v-show="worksShowLength > 0" class="content work-slogan relative 1" ref="works">
       <detailWorks :works_details="worksShowData" :preview="showPreview"></detailWorks>
     </div>
     <div class="work-slogan HYXiDengXianJ">
@@ -36,7 +39,6 @@
 <script>
 import detailWorks from "@/components/detailWorks/detailWorks";
 import {getArtData, getHomeData} from "@/utils/utils";
-
 export default {
   name: 'workdetails',
   components: {
@@ -46,61 +48,65 @@ export default {
     return {
       workId: this.$route.query.id,
       worksData: {},
-      years: []
+      years: [],
+      worksShowLength:null
     }
   },
   computed: {
     isEnglish() {
       return this.$store.state.isEnglish
     },
-    currentYear(){
+    currentYear() {
       return this.$store.state.currentYear
     },
     worksDetailData() {
       return this.worksData.artworkImages
     },
-    worksShowData(){
+    worksShowData() {
       return this.worksData.showInfos
     },
     worksPreview() {
-      return  1
+      return 1
     },
-    worksPreviewText(){
-      if(!this.isEnglish){
+    worksPreviewText() {
+      if (!this.isEnglish) {
         return this.worksData.title
-      }else{
+      } else {
         return this.worksData.titleEn
       }
     },
-    showPreview(){
+    showPreview() {
       return 2
     }
   },
-  created() {
+  activated() {
     this.getArtsData(this.workId)
     this.getYears()
   },
   methods: {
-    //网络数据请求相关方法
+    //同通过id获取当前id的详情数据
     getArtsData(id) {
       getArtData(id).then(res => {
         let obj = res.data.find(function (obj) {
           return obj.id === parseInt(id)
         })
         this.worksData = obj
+        const worksShowLength = Object.keys(obj.showInfos).length;
+        this.worksShowLength = worksShowLength
       })
+
     },
     //获取年份作品列表
-    getYears(year) {
-      getHomeData(year).then(res => {
+    getYears() {
+      getHomeData().then(res => {
         let obj = res.data.yearArt
         this.years = Object.keys(obj).reverse()
       })
     },
     //  年份筛选
     goHomeYear(year) {
-      this.$router.push({name: "home"})
-      this.$store.state.currentYear =  year
+      this.$router.push({name: "home", query: {id: 'link1'}})
+      this.$store.state.currentYear = year
     }
   }
 };

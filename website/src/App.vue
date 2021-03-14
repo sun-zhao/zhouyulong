@@ -1,6 +1,6 @@
 <template>
   <div class="layout" id="app">
-    <div class="header HYXiDengXianJ clearfix">
+    <div ref="header" class="header HYXiDengXianJ clearfix">
       <span class="fl logo" @click="goHome"><img src='./assets/img/logo.png'></span>
       <div v-if="!isEnglish" class="fl header-nav clearfix">
         <a :href="'#link' + index" v-for="(item,index) in navs"
@@ -58,7 +58,6 @@ export default {
     }
   },
   created() {
-
   },
   methods: {
     clickTab(index) {
@@ -69,7 +68,6 @@ export default {
       this.$router.push({name: 'home'})
     },
     changeCN() {
-      // this.$cookies.set("isEnglish", "false", "0");
       this.$store.commit('changeCN')
     },
     changeEN() {
