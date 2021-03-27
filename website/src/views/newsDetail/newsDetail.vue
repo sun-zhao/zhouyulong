@@ -26,8 +26,8 @@ export default {
       return this.$store.state.isEnglish
     }
   },
-  created() {
-    this.getNewsDetail(this.newsId)
+  activated() {
+    this.getNewsDetail(this.$route.query.id)
   },
   methods:{
     getNewsDetail(id){

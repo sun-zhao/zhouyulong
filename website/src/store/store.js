@@ -7,13 +7,15 @@ Vue.use(VueCookies)
 const store = new Vuex.Store({
     state: {
         isEnglish: JSON.parse(localStorage.getItem('isEnglish')) || false,
-        currentYear: 2021,
-        results: {}
+        currentYear: 2020,
+        results: {},
+        videoList: {}
     },
     getters: {
         isEnglish: state => state.isEnglish,
         currentYear: state => state.currentYear,
-        results: state => state.results
+        results: state => state.results,
+        videoList: state => state.videoList
     },
     mutations: {
         changeCN(state) {
@@ -25,8 +27,8 @@ const store = new Vuex.Store({
             localStorage.setItem('isEnglish', JSON.stringify(state.isEnglish))
         }
     },
-    actions: {},
+    actions: {
+    },
     modules: {}
 })
-
 export default store

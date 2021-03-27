@@ -27,13 +27,9 @@ export default {
   methods: {
     getListData() {
       //如果传过来的ID=1那么说明是请求新闻列表，搜索要想展示列表，请传入2
-      if (this.id == 1) {
-        getNewsList().then(res => {
-          this.list = res.data
-        })
-      } else {
-        return
-      }
+      getNewsList().then(res => {
+        this.list = res.data
+      })
     },
     //  点击查看新闻详情
     newsClick(id) {

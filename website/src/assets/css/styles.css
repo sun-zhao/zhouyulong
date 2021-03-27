@@ -362,7 +362,7 @@ template {
 }
 
 .text-left {
-    text-align: left;
+    text-align: left !important;
 }
 
 .text-right {
@@ -559,6 +559,13 @@ a.link {
 
 .swiper-slide {
     display: block;
+    height: auto;
+}
+
+.swiper-slide img {
+    position: relative;
+    z-index: 11;
+    /*background:url("../../assets/img/loading.gif") no-repeat center;*/
 }
 
 .swiper-news .swiper-slide img {
@@ -618,7 +625,7 @@ a.link {
 .nums-nav {
     position: absolute;
     width: 100px;
-    top: -20px;
+    top:0;
     left: -100px;
 }
 
@@ -676,7 +683,7 @@ a.link {
 }
 
 .pswp__bg {
-    background: url("../../assets/img/bg.jpg") repeat !important;
+    background: #f6f5f1 !important;
 }
 
 .pswp__top-bar {
@@ -701,11 +708,14 @@ a.link {
 .pswp__button--arrow--right:before {
     background: url("../../assets/img/next.png") no-repeat !important;;
 }
-.pswp__caption__center{
-    width:70%!important;
-    max-width: 100%!important;
+
+.pswp__caption__center {
+    width: 90% !important;
+    max-width: 100% !important;
 }
+
 .category-main {
+    width: 330px;
     position: fixed;
     left: 5%;
     top: 20%;
@@ -723,8 +733,12 @@ a.link {
     text-decoration: underline;
 }
 
+.articleList {
+    padding-bottom: 10px;
+}
+
 .articleList p {
-    text-indent: 80px;
+    text-indent: 10px;
 }
 
 .articelDetail {
@@ -763,53 +777,317 @@ a.link {
     cursor: pointer;
 }
 
-#link1,#link3{
+#link1, #link3 {
     position: absolute;
-    top: 26.6%;
+    top: 23%;
     z-index: 999;
     opacity: 0;
 }
 
-#link3{
-    top:52%;
+#link3 {
+    top: 50%;
 }
 
+#link4 {
+    top: 52%;
+    padding-bottom: 200px;
+}
+
+#link5 {
+    padding-top: 150px;
+}
+
+.video-box {
+    width: 80%;
+    margin: 30px auto;
+}
+
+.text-hidden {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 11;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    height: 305px;
+}
+
+.swiper-container {
+    /*--swiper-theme-color: #ff6600;!* 设置Swiper风格 *!*/
+    --swiper-preloader-color: #a27c54; /* 单独设置预加载圆圈的颜色 */
+}
+.visible-xs {
+    display: none;
+}
 @media screen and (max-width: 1024px) {
+    .text-hidden {
+        height: 4.1rem;
+    }
+
     html {
         font-size: calc(100vw / 7.5);
+        overflow-x: hidden;
+    }
+
+    .font16 {
+        font-size: 0.26rem;
     }
 
     .font18 {
-        font-size: 0.10rem;
+        font-size: 0.26rem;
     }
 
     .font20 {
-        font-size: 0.12rem;
+        font-size: 0.28rem;
+    }
+
+    .font28 {
+        font-size: 0.28rem;
     }
 
     .mart-130 {
         margin-top: 0.2rem;
     }
 
+    .layout .mart-40 {
+        margin-top: 0.4rem;
+    }
+
     .layout {
         padding: 0 0.3rem;
+        max-width: inherit;
+    }
+
+    .header + div {
+        padding-top: 2rem;
     }
 
     .logo {
         margin-top: 0.05rem;
+        display: inline-block;
+        width: 50%;
+    }
+
+    .footer {
+        padding: 1rem 0;
+    }
+
+    .video-box {
+        width: 100%;
+    }
+
+    .video-js .vjs-big-play-button {
+        width: 1rem !important;
+        height: 1rem !important;;
+        line-height: 1rem !important;;
+        margin: -0.5rem 0 0 -0.5rem !important;;
     }
 
     .header {
+        width: 100%;
+        left: 0;
+        top: 0;
         padding: 0.3rem 0;
-        font-size: 0.12rem;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-content: center;
+        align-items: center;
+        position: fixed;
+        padding-top: 0.8rem;
+    }
+
+    .header .fl {
+        float: none;
+    }
+
+    .header .logo {
+        position: absolute;
+        left: 0.3rem;
+        top: 0.2rem;
+    }
+
+    .header-nav {
+        width: 100%;
+        margin: 0;
+        padding: 0.2rem 0;
     }
 
     .header-nav a {
-        line-height: 0.3rem;
+        line-height: 0.4rem;
+        font-size: 0.26rem;
+    }
+
+    :root {
+        --swiper-navigation-size: 20px;
+    }
+
+    .swiper-news {
+        margin: 0;
+        margin-top: 0.3rem;
     }
 
     .swiper-news, .news-box {
-        width: 50%;
+        width: 100%;
+    }
+
+    .swiper-news .swiper-container {
+        margin: 0;
+    }
+
+    .swiper-news .swiper-slide img {
+        height: auto !important;
+        width: 100%;
+    }
+
+    .search-box {
+        position: absolute;
+        font-size: 0.26rem;
+        color: #94652e;
+        top: 0.06rem;
+        right: 0.3rem;
+    }
+
+    .search-box input {
+        display: none;
+    }
+
+    .nums-nav {
+        width: 100%;
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;;
+        font-size: 0.3rem;
+        text-align: center;
+        margin-bottom: 0.5rem;
+    }
+
+    .nums-nav span {
+        display: inline-block;
+        padding: 0 0.1rem;
+    }
+
+    .swiper-works .swiper-slide img {
+        height: auto !important;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    .slogan, .work-slogan {
+        padding: 1rem 0;
+    }
+
+    .swiper-slide .title {
+        line-height: 0.2rem;
+    }
+
+    .hidden-xs {
+        display: none;
+    }
+
+    .visible-xs {
+        display: block;
+    }
+
+    .publication .pub-item:nth-child(2) {
+        margin: 0;
+    }
+
+    .publication .pub-item {
+        width: 33%;
+        font-size: 0.12rem;
+
+    }
+
+    .pub-img, .pub-img img {
+        width: 90%;
+        height: auto;
+    }
+
+    .pub-img, .pub-img {
+        height: 3rem;
+    }
+
+    .pub-item .font14 {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        font-size: 0.16rem;
+    }
+
+    .publication a.link {
+        font-size: 0.14rem;
+    }
+
+    .about {
+        float: none !important;
+        width: 100%;
+        font-size: 0.26rem;
+    }
+
+    .about img {
+        width: 100%;
+    }
+    #link3{
+        top:45%;
+    }
+    #link4 {
+        padding-bottom: 0;
+    }
+
+    #link5 {
+        padding-top: 1rem;
+    }
+
+    .swiper-works {
+        margin: 0;
+    }
+
+    .pswp__ui--hidden .pswp__caption {
+        opacity: 1;
+    }
+
+    .pswp__top-bar {
+        display: block !important;
+    }
+
+    .articelDetail {
+        width: auto;
+        padding: 1rem 0;
+    }
+
+    .category-main {
+        width: 100%;
+        position: static;
+        top: 0;
+        left: 0;
+        text-align: center;
+    }
+
+    .category-main p {
+        display: inline-block;
+        font-size: 0.26rem;
+        padding: 0 0.3rem;
+    }
+
+    .category > div {
+        display: inline-block;
+    }
+
+    .articleList {
+        margin-top: 0.3rem;
+    }
+
+    .articleList p {
+        display: block;
+        text-indent: 0;
+        text-align: left;
+    }
+
+    #link2 {
+        padding-top: 1.5rem;
     }
 }
 

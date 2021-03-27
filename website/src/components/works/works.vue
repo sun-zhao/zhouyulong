@@ -4,12 +4,12 @@
       <span v-for="(year,index) in years"
             :key="index"
             :class="{active:year  == currentYear}"
-            @click="changeYear(year)">{{ parseInt(year) }}</span>
+            @click="changeYear(year)">{{ year }}</span>
     </div>
     <div class="swiper-works">
       <swiper ref="mySwiper" :options="swiperOption">
-        <swiper-slide v-for="item in yearWorks" :key="item.index">
-          <p @click="goWorkDetail(item.id)"><img :src="item.showImages[0]"></p>
+        <swiper-slide v-for="item in yearWorks" :key="item.index" :data-id="item.id">
+          <img :src="item.artworkImages[0]">
           <p class="title link font14 mart-10">{{ !isEnglish ? item.title : item.titleEn }}</p>
         </swiper-slide>
       </swiper>
@@ -23,6 +23,7 @@
 import {Swiper, SwiperSlide} from 'vue-awesome-swiper'
 import {getHomeData} from "@/utils/utils";
 
+let vm = null;
 export default {
   name: "Works",
   components: {
@@ -35,31 +36,40 @@ export default {
       yearWorks: [],
       swiperOption: {
         slidesPerView: 2,
-        spaceBetween: 80,
+        spaceBetween: 10,
         slidesPerGroup: 1,
+        loop: true,
+        autoplay: {
+          delay: 2000,
+          // disableOnInteraction: false
+        },
         navigation: {
           nextEl: '.swiper-button-next', //前进按钮的css选择器或HTML元素。
           prevEl: '.swiper-button-prev', //后退按钮的css选择器或HTML元素。
           hiddenClass: 'my-button-hidden', //按钮隐藏时的Class
+        },
+        on: {
+          click(swiper) {
+            const id = swiper.clickedSlide.getAttribute('data-id')
+            vm.goWorkDetail(id)
+          }
         }
       }
     }
   },
   //计算属性
   computed: {
-    isEnglish(){
+    isEnglish() {
       return this.$store.state.isEnglish
     },
-    currentYear(){
+    currentYear() {
       return this.$store.state.currentYear
     }
   },
-  created() {
-    this.getYearWorks(this.$store.state.currentYear)
-    // if(this.clickYear != 0){
-    //   this.getYearWorks(this.clickYear)
-    //   this.currentYear = this.clickYear
-    // }
+  activated() {
+    this.getYearWorks(this.currentYear)
+    console.log(this.currentYear)
+    vm = this
   },
   methods: {
     prev() {

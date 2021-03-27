@@ -3,9 +3,10 @@
     <div class="swiper-works">
       <swiper ref="mySwiper" :options="swiperOption">
         <swiper-slide v-for="item in works_details" :key="item.index">
-          <p v-if="!item.url"><img :src="item" :preview="preview" :preview-text="previewText"></p>
+          <p><img :src="item.url" :preview="preview" ></p>
+<!--          :preview-text="item.title"-->
 <!--          <p v-if="item.url"><img :src="item.url" :preview="preview" :preview-text="item.title"></p>-->
-<!--          <p class="title"><a class="link font14">{{ item.title }}</a></p>-->
+<!--          <p class="title text-left mart-20"><a class="link font14">{{ item.title }}</a></p>-->
         </swiper-slide>
       </swiper>
       <div class="swiper-button-next" id="swiper-news-left" @click="next"></div>

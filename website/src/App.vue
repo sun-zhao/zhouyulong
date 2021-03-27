@@ -1,12 +1,13 @@
 <template>
   <div class="layout" id="app">
     <div ref="header" class="header HYXiDengXianJ clearfix">
-      <span class="fl logo" @click="goHome"><img src='./assets/img/logo.png'></span>
+      <span class="fl logo" @click="goHome" v-scroll-to="{ el: '#app'}"><img src='./assets/img/logo.png'></span>
       <div v-if="!isEnglish" class="fl header-nav clearfix">
-        <a :href="'#link' + index" v-for="(item,index) in navs"
+        <a  v-for="(item,index) in navs"
            :class="{active: active == index}"
            :key="index"
-           @click="clickTab(index)"
+           v-scroll-to="{ el: '#link' + index }"
+            @click="clickTab(index)"
            :data-id="index">{{ item }}</a>
       </div>
       <div v-else class="fl header-nav clearfix">
@@ -14,7 +15,8 @@
            :class="{active: active == index}"
            :key="index"
            :data-id="index"
-           @click="clickTab(index)">{{ item }}</a>
+           @click="clickTab(index)"
+           v-scroll-to="{ el: '#link' + index }">{{ item }}</a>
       </div>
       <div class="search-box fr">
         <input type="search" @keyup.enter="getSearch" ref="searchInput">
@@ -37,7 +39,6 @@
 // import Header from "@/components/header/header"
 import Footer from "@/components/footer/footer";
 import {search} from '@/utils/utils'
-
 export default {
   name: 'App',
   components: {
@@ -53,7 +54,7 @@ export default {
     return {
       logUrl: '/assets/img/logo.png',
       navs: ['新闻', '作品', '展览', '出版物', '资料库', '关于'],
-      navsEn: ['News', 'Works', 'Exhibitions', 'Publications', 'Database', 'About'],
+      navsEn: ['News', 'Works', 'Exhibitions', 'Publications', 'Library', 'About'],
       active: 0
     }
   },

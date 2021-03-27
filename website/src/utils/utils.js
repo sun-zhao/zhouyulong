@@ -11,6 +11,12 @@ export function getArtData() {
         url: '/wx/art/list'
     })
 }
+//通过id获取作品详情
+export function getArtDetail(id) {
+    return request({
+        url: '/wx/art/detail?id=' + id
+    })
+}
 
 export function getCategoryList() {
     return request({

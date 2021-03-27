@@ -1,7 +1,7 @@
 <template>
   <div class="news news-list">
     <p v-for="(item,index) in news.slice(0, 2)" :key="index">
-      <span>{{!isEnglish ? item.newsTitle : item.newsTitleEn }}</span>
+      <span>{{isEnglish && item.newsTitleEn ? item.newsTitleEn : item.newsTitle }}</span>
       <a @click="newsClick(item.id)" :id="item.id" class="link">了解更多</a>
     </p>
   </div>

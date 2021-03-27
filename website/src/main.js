@@ -8,7 +8,31 @@ import 'vue-photo-preview/dist/skin.css'
 import VueCookies from 'vue-cookies'
 import 'default-passive-events'
 import store from "@/store/store";
-
+import VueVideoPlayer from 'vue-video-player';
+import 'video.js/dist/video-js.css';
+import VueScrollTo from 'vue-scrollto';
+Vue.use(VueScrollTo, {
+    container: "body",
+    duration: 200,
+    easing: 'ease-out',
+    offset: 0,
+    force: true,
+    cancelable: true,
+    onStart: false,
+    onDone: false,
+    onCancel: false,
+    x: false,
+    y: true
+})
+// Vue.use(Lazy, {
+//     preloadImages: false,
+//     lazy: {
+//         loadPrevNext: true,
+//     },
+//     loadOnTransitionStart: false,
+//     watchSlidesVisibility: true, //解决了swiper前面的一个不能提前加载的bug
+// })
+Vue.use(VueVideoPlayer);
 Vue.use(VueCookies)
 
 Vue.use(vuePhotoPreview)
